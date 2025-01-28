@@ -34,7 +34,7 @@ const TopProducts = ({ products, setImg, setCount1, count1, setItemPrice, itemPr
 
     // {isAuthenticated && }
 
-    <div className="px-[15px] w-full max-h-[2897px] py-[30px] mx-auto">
+    <div className="px-[15px] w-full min-h-fit py-[30px] mx-auto">
       <h2 className="text-[20px] sm:text-[30px] sm:mx-14 text-[#2E2F33] leading-[24.2px] font-bold">
         Top Products
       </h2>
