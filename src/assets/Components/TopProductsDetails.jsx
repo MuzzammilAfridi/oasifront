@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ const TopProductsDetails = ({ products,  }) => {
   const [open, setOpen] = useState(false)
 const [signUp, setSignUp] = useState(false)
 const [forgotPassword, setForgotPassword] = useState(false)
+const [userId, setUserId] = useState()
   const dispatch = useDispatch()
 // console.log(open);
 
@@ -26,6 +27,28 @@ const [forgotPassword, setForgotPassword] = useState(false)
          
     const {id} = useParams();
     const navigate = useNavigate()
+
+    axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("https://oasback.onrender.com/user", {
+          withCredentials: true,
+        });
+        setUserId(res.data.user._id);
+        console.log("User id",res.data.user._id);
+        console.log("Product id",id);
+        
+
+       
+      } catch (err) {
+        console.error("Error fetching user:", err);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
     // console.log("ID from useParams:", id);
     // console.log("Products array:", products);
@@ -45,11 +68,16 @@ const [forgotPassword, setForgotPassword] = useState(false)
     }
 
   const notifySuccess = () => toast.success("Product added successfully!");
-  const { user, isAuthenticated, isLoading, logout, } = useAuth0();
+  // const { user, isAuthenticated, isLoading, logout, } = useAuth0();
 
-  const handleBuy = ()=>{
+  const handleBuy =async ()=>{
 
-    axios.get('https://oasback.onrender.com/isAuthenticated').then((res)=>{
+    await axios.get('https://oasback.onrender.com/isAuthenticated').then((res)=>{
+       axios.post(`https://oasback.onrender.com/cart/${userId}/add`, 
+        { productId: id, quantity: 1 }, 
+        { withCredentials: true }
+      );
+      
             
       if(res.data.success == true){
         notifySuccess()

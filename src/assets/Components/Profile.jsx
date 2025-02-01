@@ -1,75 +1,129 @@
-import { FaGoogle, FaApple } from 'react-icons/fa';
-// import { FiX } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useState } from 'react';
-// import { use } from '../../../../backend/routes/userRoutes';
+import { FaGoogle, FaApple } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-// import Navbar from './Navbar';
+function Profile({ setIsprofile }) {
+  const [user, setUser] = useState(null);
+  const [address, setAddress] = useState(null);
+  const navigate = useNavigate();
 
-function Profile({setIsprofile }) {
-  
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  axios.defaults.withCredentials = true;
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("https://oasback.onrender.com/user", {
+          withCredentials: true,
+        });
+        setUser(res.data.user);
 
-  axios.defaults.withCredentials = true
-
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-  
-    try {
-      const res = await axios.post('https://oasback.onrender.com/login', { email, password });
-      // console.log(res.data);
-      if(res.data.success && res.data.admin){ 
-        navigate('/admin')
-        setOpen(false)
+        if (res.data.user?.address) {
+          setAddress(res.data.user.address);
+        }
+      } catch (err) {
+        console.error("Error fetching user:", err);
       }
-      
-    
-    
-  
-    } catch (err) {
-      console.error(err);
-    }
+    };
+
+    fetchUser();
+  }, []);
+
+  const handleLogout = () => {
+    axios.get("https://oasback.onrender.com/logout").then(() => {
+      setUser(null);
+      setIsprofile(false);
+      navigate("/");
+    });
   };
-  
-  const handleLogout = ()=>{
-    axios.get('https://oasback.onrender.com/logout').then((res)=>{
-        handleClose()
-        navigate('./')
-    })
-  }
 
-
-  const handleClose = ()=>{
-  
-    setIsprofile(false)
-
-
-  }
-
-  
-
-  
+  const handleClose = () => {
+    setIsprofile(false);
+  };
 
   return (
-    <div className="sm:w-[35vw] w-screen flex fixed right-0 top-0 flex-col gap-5    bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center p-6 bg-gray-900 h-screen overflow-y-auto">
+      <p
+        onClick={handleClose}
+        className="bg-white cursor-pointer font-medium absolute left-2 top-1 rounded-full px-3 py-1"
+      >
+        X
+      </p>
 
-     
-      
-      <div className="flex    overflow-y-hidden bg-cyan-300  border w-screen sm:w-full absolute top-0 right-0 justify-center min-h-screen ">
-        <div className="w-full  max-w-md p-8">
-          <button className='text-xl sm:relative sm:bottom-5  px-2 py-1 font-bold'
-          onClick={handleClose}>X</button>
-
-          <div className="">
-          
-          <button onClick={handleLogout} className='px-4 py-2 bg-slate-300 rounded-md'>Logout</button>
-       
+      <div className="w-full max-w-md min-h-fit bg-green-500 rounded-2xl shadow-md p-6">
+        <div className="flex items-center gap-4">
+          <img
+            src="https://images.pexels.com/photos/11286875/pexels-photo-11286875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="User Avatar"
+            className="w-20 object-contain h-20 rounded-full border-2 border-blue-500"
+          />
+          <div>
+            <h2 className="text-xl font-semibold">{user?.name || "Guest"}</h2>
+            <p className="text-gray-500">{user?.email || "Not Logged In"}</p>
           </div>
+        </div>
+      </div>
+
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-md mt-6">
+        {/* Address Section */}
+        <div className="p-4 border-b">
+          <h3 className="font-medium text-lg mb-2">Address</h3>
+          <p className="text-sm text-gray-500">
+            {address
+              ? `${address.street}, ${address.city}, ${address.state}, ${address.zip}`
+              : "No address saved."}
+          </p>
+          <Link
+            onClick={handleClose}
+            to="/address"
+            className="mt-2 text-sm text-blue-500 hover:underline"
+          >
+            Edit Address
+          </Link>
+        </div>
+
+        {/* Orders Section */}
+        <div className="p-4 border-b">
+          <h3 className="font-medium text-lg mb-2">Orders</h3>
+          <p className="text-sm text-gray-500">You have 3 active orders.</p>
+          <Link
+            to="/my-order"
+            onClick={handleClose}
+            className="mt-2 text-sm text-blue-500 hover:underline"
+          >
+            View Orders
+          </Link>
+        </div>
+
+        {/* Wishlist Section */}
+        <div className="p-4 border-b">
+          <h3 className="font-medium text-lg mb-2">Wishlist</h3>
+          <p className="text-sm text-gray-500">5 items in your wishlist.</p>
+          <Link
+            onClick={handleClose}
+            to="/cartlist"
+            className="mt-2 text-sm text-blue-500 hover:underline"
+          >
+            View Wishlist
+          </Link>
+        </div>
+
+        {/* Account Settings Section */}
+        <div className="p-4 border-b">
+          <h3 className="font-medium text-lg mb-2">Account Settings</h3>
+          <button className="text-sm text-blue-500 hover:underline">
+            Manage Settings
+          </button>
+        </div>
+
+        {/* Logout Section */}
+        <div className="p-4">
+          <button
+            onClick={handleLogout}
+            className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>

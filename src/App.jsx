@@ -26,6 +26,9 @@ import Admin from './assets/Components/Admin.jsx'
 import axios from 'axios'
 import ResetPassword from './assets/Components/ResetPassword.jsx'
 import Profile from './assets/Components/Profile.jsx'
+import Address from './assets/Components/Address.jsx'
+import MyOrder from './assets/Components/MyOrder.jsx'
+import AddressDetails from './assets/Components/AddressDetails.jsx'
 // import { Counter } from './features/counter/Counter'
 // import Design from './assets/Components/Design'
 
@@ -348,6 +351,9 @@ function App() {
       <Route path="/product/:id" element={<TopProductsDetails setForgotPassword={setForgotPassword} products={products} />} />
 
       <Route path='/admin' element={<Admin/>}/>
+      <Route path='/address' element={<Address/>}/>
+      <Route path='/my-order' element={<MyOrder/>}/>
+      <Route path='/address-details' element={<AddressDetails/>}/>
 
 
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
+import { Link } from 'react-router-dom'
 
 const OderPlaced = () => {
   return (
@@ -13,7 +14,7 @@ const OderPlaced = () => {
                 <p className='font-medium mt-5 text-[18px] leading-[21.73px] text-center text-[#2e2f33]'>Your Order is Confirmed</p>
                 <p>Thank you for shopping with us! Your beautiful new furniture is on its way and will be with you soon. Get ready to transform your space!</p>
 
-                <button className='w-[353px] h-[56px] bg-[#7c71df] text-[16px] leading-[19.36px] font-semibold py-3 text-white rounded-3xl mt-20'>Done</button>
+                <Link to='/my-order' className='w-[353px] h-[56px] bg-[#7c71df] text-[16px] leading-[19.36px] font-semibold py-3 text-white rounded-3xl mt-20'>Done</Link>
             </div>
         </div>
       

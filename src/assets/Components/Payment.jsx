@@ -1,6 +1,7 @@
 // src/components/Payment.js
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 
 const Payment = () => {
   const [formData, setFormData] = useState({
@@ -120,12 +121,13 @@ const Payment = () => {
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
+            <Link
+            to='/order'
+              // type="submit"
               className=" w-[100vw] sm:w-[30vw] absolute sm:relative bottom-0 left-0 bg-[#7c71df] text-white py-3 mt-4 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 "
             >
               Confirm Payment
-            </button>
+            </Link>
           </form>
         </div>
       </div>
