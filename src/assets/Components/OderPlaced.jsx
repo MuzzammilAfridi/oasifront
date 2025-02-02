@@ -11,7 +11,7 @@ const OderPlaced = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:7070/user", {
+        const res = await axios.get("https://oasback.onrender.com/user", {
           withCredentials: true,
         });
         setUserId(res.data.user._id);
@@ -30,7 +30,7 @@ const OderPlaced = () => {
       if (!userId) return;
   
       try {
-        const res = await axios.get(`http://localhost:7070/product/cart/${userId}`);
+        const res = await axios.get(`https://oasback.onrender.com/product/cart/${userId}`);
         console.log("Fetched Cart Data:", res.data.products[0]._id);  // Log fetched data
   
         if (res.data && Array.isArray(res.data.products)) {
@@ -87,7 +87,7 @@ const OderPlaced = () => {
   const handleOrder = async () => {
     try {
       // Fetch cart data
-      const res = await axios.get(`http://localhost:7070/product/cart/${userId}`);
+      const res = await axios.get(`https://oasback.onrender.com/product/cart/${userId}`);
       const cart = res.data; // Assuming cart data contains products array and other details
       
       // Ensure the cart has products before proceeding
@@ -113,7 +113,7 @@ const OderPlaced = () => {
       console.log("Sending order:", orderData);
   
       // Send order data to the server
-      const response = await axios.post("http://localhost:7070/order/place", orderData);
+      const response = await axios.post("https://oasback.onrender.com/order/place", orderData);
       console.log(response.data);  // Check the response from the server
   
     } catch (error) {
