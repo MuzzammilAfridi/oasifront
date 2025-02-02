@@ -16,7 +16,7 @@ function LoginPage({ setForgotPassword, setOpen, open, setSignUp, signUp }) {
     setLoading(true); // Start loading
 
     try {
-      const res = await axios.post('http://localhost:7070/login', { email, password }, { withCredentials: true });
+      const res = await axios.post('https://oasback.onrender.com/login', { email, password }, { withCredentials: true });
 
       if (res.data.success) {
         if (res.data.admin) {
