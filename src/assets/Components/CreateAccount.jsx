@@ -65,9 +65,10 @@ const CreateAccount = ({setOpen, setSignUp}) => {
         
 
         <input required className='px-5 py-2 rounded-lg' name='name' onChange={(e)=>setName(e.target.value)} type="text" placeholder='Name' />
-        <input className='px-5 py-2 rounded-lg' onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='Password' required />
         <input required className='px-5 py-2 rounded-lg' onChange={(e)=>setEmail(e.target.value)} type="email" placeholder='Email' />
         <input required className='px-5 py-2 rounded-lg' onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='Phone Number' />
+        <input className='px-5 py-2 rounded-lg' onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='Password' required />
+
         <button onClick={handleSign} className='px-5 py-2 rounded-lg bg-cyan-400'>Create account</button>
         </div>
         <span className='ml-4'>

@@ -129,8 +129,8 @@ function LoginPage({setForgotPassword, setOpen, open, setSignUp, signUp }) {
             </button>
           </form>
           <div className="my-3  sm:relative sm:bottom-5 sm:my-1 text-center">
-            <p className="text-sm text-gray-500 sm:relative sm:bottom-3 mb-2 sm:mb-0">Or continue with</p>
-            <div className="flex  justify-center sm:relative sm:bottom-3 sm:right-3 flex-wrap mt-2 sm:mt-1">
+            {/* <p className="text-sm text-gray-500 sm:relative sm:bottom-3 mb-2 sm:mb-0">Or continue with</p> */}
+            {/* <div className="flex  justify-center sm:relative sm:bottom-3 sm:right-3 flex-wrap mt-2 sm:mt-1">
               <button className="flex items-center justify-center w-[353px] bg-gray-100 py-2 px-4 rounded-lg hover:bg-gray-200">
                 <FaGoogle />
                 <span className="ml-2">Google</span>
@@ -140,7 +140,7 @@ function LoginPage({setForgotPassword, setOpen, open, setSignUp, signUp }) {
                 <FaApple />
                 <span className="ml-2">Apple</span>
               </button>
-            </div>
+            </div> */}
             <div  className="text-center sm:relative sm:bottom-3">
             <p className="text-sm text-gray-500">
               First time here?{' '}

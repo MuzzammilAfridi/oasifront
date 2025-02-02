@@ -70,34 +70,39 @@ const [userId, setUserId] = useState()
   const notifySuccess = () => toast.success("Product added successfully!");
   // const { user, isAuthenticated, isLoading, logout, } = useAuth0();
 
-  const handleBuy =async ()=>{
-
-    await axios.get('https://oasback.onrender.com/isAuthenticated').then((res)=>{
-       axios.post(`https://oasback.onrender.com/cart/${userId}/add`, 
-        { productId: id, quantity: 1 }, 
-        { withCredentials: true }
-      );
+  const handleBuy = async () => {
+    try {
+      const authResponse = await axios.get('https://oasback.onrender.com/isAuthenticated');
       
-            
-      if(res.data.success == true){
-        notifySuccess()
-        dispatch(addItem(product))
+      if (authResponse.data.success) {
+        console.log("User authenticated:", authResponse.data);
+        
+        const cartResponse = await axios.post(
+          `https://oasback.onrender.com/product/cart/${userId}/add`,
+          { productId: id, quantity: 1 },
+          { withCredentials: true }
+        );
+  
+        console.log("Cart response:", cartResponse.data);
+  
        
+        if (cartResponse.data?.success || cartResponse.status === 200) {
+          notifySuccess();
+          dispatch(addItem(product));
+        } else {
+          console.warn("Unexpected response format:", cartResponse.data);
+        }
+      } else {
+        console.warn("User not authenticated");
+        setOpen(true);
       }
-     
-      
-    })
-    .catch((err)=>{
-      setOpen(true)
-
-      console.log(err);
-      
-      // navigate('/login')
-
-    })
-
-   
-  }
+    } catch (error) {
+      console.error("Error in handleBuy:", error);
+      setOpen(true);
+    }
+  };
+  
+  
 
 
   return (
@@ -144,11 +149,11 @@ const [userId, setUserId] = useState()
         {/* Product Details Section */}
         <div className='flex-1 pl-4 sm:pl-10 h-fit  flex flex-col'>
           <div className='flex-grow'>
-            <p className='font-semibold text-[25px] leading-[30.26px] text-[#2E2F33] mt-5'>Luxe Armchair - Left Arm <br /> Chute</p>
+            <p className='font-semibold text-[25px] leading-[30.26px] text-[#2E2F33] mt-5'>{product.name}</p>
             <p className='mt-3'>Rating (remaining)</p>
   
             <div className='flex items-center justify-start gap-[6px] mt-5'>
-              <p className='font-semibold text-[26px] leading-[31.47px] text-[#7C71DF]'>$899.00</p>
+              <p className='font-semibold text-[26px] leading-[31.47px] text-[#7C71DF]'>{product.price}</p>
               <p className='text-[16px] font-normal leading-[19.36px] line-through text-[#5F6980]'>$1999.00</p>
               <p className='px-6 py-3 text-[16px] font-medium leading-[19.36px] rounded-3xl bg-[#f650616c] text-[#f65061]'>-40%</p>
             </div>
@@ -174,7 +179,7 @@ const [userId, setUserId] = useState()
           <div className='flex justify-start mt-7 mb-5'>
             <button 
             onClick={handleBuy}
-            className='w-[351px] h-[45px] sm:h-[53px] bg-[#7c71df] text-white rounded-[50px]'>Buy now</button>
+            className='w-[351px] h-[45px] sm:h-[53px] bg-[#7c71df] text-white rounded-[50px]'>Add to Cart</button>
           </div>
   
           {/* Shipping Info */}

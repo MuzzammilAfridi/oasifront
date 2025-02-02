@@ -71,6 +71,8 @@ const CartList = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+      {console.log(cart && cart.products.length)}
+      
       <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
 
       {loading ? (
