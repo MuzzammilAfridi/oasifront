@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 
+
 const LoginPage = ({ setForgotPassword, setOpen, open, setSignUp, signUp }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
