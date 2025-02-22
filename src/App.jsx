@@ -235,7 +235,7 @@ function App() {
 
 
   useEffect(()=>{
-    const data = axios.get("http://localhost:7070/product/allproducts").then((res)=>{
+    const data = axios.get("https://oasback.onrender.com/product/allproducts").then((res)=>{
       // console.log(res.data.products);
       setProducts([...topProductsData, ...res.data.products])
 
