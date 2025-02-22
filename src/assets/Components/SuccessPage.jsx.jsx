@@ -23,7 +23,7 @@ const SuccessPage = () => {
             Purchase Successful!
           </h1>
           <p className="text-gray-600">
-            Your ad has been successfully purchased. Thank you for your trust! this is nothing but success page
+            Your ad has been successfully purchased. Thank you for your trust!
           </p>
           {/* <button
             className="mt-6 px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"

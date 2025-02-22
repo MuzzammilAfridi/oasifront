@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import AddressDetails from "./AddressDetails";
 
+
 const CartList = () => {
   const [userId, setUserId] = useState(null);
   const [cart, setCart] = useState(null);
@@ -11,7 +12,7 @@ const CartList = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("https://oasback.onrender.com/user", {
+        const res = await axios.get("http://localhost:7070/user", {
           withCredentials: true,
         });
         if (res.data.user?._id) setUserId(res.data.user._id);
@@ -31,8 +32,9 @@ const CartList = () => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`https://oasback.onrender.com/product/cart/${userId}`);
+      const res = await axios.get(`http://localhost:7070/product/cart/${userId}`);
       setCart(res.data);
+      
     } catch (err) {
       console.error("Error fetching cart:", err);
     } finally {
@@ -44,7 +46,7 @@ const CartList = () => {
     if (!userId) return;
     
     try {
-      const res = await axios.put(`https://oasback.onrender.com/product/cart/update`, {
+      const res = await axios.put(`http://localhost:7070/product/cart/update`, {
         userId, // Ensure userId is sent
         productId, // Ensure productId is sent
         type, // "increase" or "decrease"
@@ -69,11 +71,18 @@ const CartList = () => {
     }
   };
 
+ 
+  
+  
+  
+
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      {console.log(cart && cart.products.length)}
+    <div className="max-w-2xl mx-auto p-6 mt-10 bg-white shadow-md rounded-lg">
+     
       
       <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+      
+
 
       {loading ? (
         <p className="text-gray-600">Loading...</p>
@@ -83,12 +92,12 @@ const CartList = () => {
         <ul className="space-y-4">
           {cart &&
             cart.products.map(({ productId, quantity }) => (
-              <li key={productId._id} className="flex justify-between items-center bg-gray-100 p-4 rounded-md">
+              <li key={productId && productId._id} className="flex flex-col sm:flex-row justify-between  sm:items-center items-start bg-gray-100 min-h-[140px] p-4 rounded-md">
                 <div className="flex items-center gap-4">
-                  <img src={productId.img} alt={productId.name} className="w-16 h-16 object-cover rounded-md" />
+                  <img src={productId && productId.img} alt={productId && productId.name} className="w-16 h-16 object-cover rounded-md" />
                   <div>
-                    <p className="font-medium">{productId.name}</p>
-                    <p className="text-gray-600">${productId.price} x {quantity}</p>
+                    <p className="font-medium">{productId && productId.name}</p>
+                    <p className="text-gray-600">${productId && productId.price} x {quantity}</p>
                   </div>
                 </div>
 
@@ -123,6 +132,7 @@ const CartList = () => {
         <div className="mt-6 flex justify-between items-center border-t pt-4">
           <p className="text-lg font-semibold">Total: ${cart.totalPrice}</p>
           <Link
+           
             to="/address-details"
             className="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700"
           >

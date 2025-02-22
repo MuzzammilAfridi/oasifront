@@ -80,7 +80,7 @@ function Navbar({isAdmin, setIsprofile, open, setOpen, count1 }) {
   // const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 
   return (
-    <nav className="bg-white shadow-md h-[10vh] sm:h-[13vh]">
+    <nav className="bg-white sm:bg-cyan-400 shadow-md h-[10vh] sm:h-[13vh]">
       <div className="w-screen  px-8 py-3 h-full  flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
@@ -94,7 +94,7 @@ function Navbar({isAdmin, setIsprofile, open, setOpen, count1 }) {
 <path d="M50.3706 14.4935C50.3706 15.5406 49.9053 16.3965 48.9745 17.0614C48.0604 17.7262 47.0133 18.0586 45.8332 18.0586C44.6532 18.0586 43.7141 17.8093 43.0161 17.3107C42.3346 16.8121 41.9939 16.3716 41.9939 15.9893C41.9939 15.7567 42.2848 15.3827 42.8665 14.8675C43.4482 14.3356 43.9385 14.0115 44.3374 13.8952C45.1684 14.5101 45.8498 15.4824 46.3817 16.8121C46.9967 16.7622 47.3041 16.4713 47.3041 15.9395C47.3041 15.1749 46.631 14.0946 45.2848 12.6985C43.9385 11.2857 43.2654 10.1639 43.2654 9.33283C43.2654 8.50181 43.6393 7.86192 44.3872 7.41316C45.1352 6.94779 46.0327 6.7151 47.0798 6.7151C48.1435 6.7151 48.9413 6.90624 49.4731 7.28851C50.005 7.65416 50.2709 8.16109 50.2709 8.80929C50.2709 9.44087 49.764 10.3218 48.7501 11.4519C48.8665 11.5683 49.0161 11.7262 49.1989 11.9256C49.3817 12.1085 49.6227 12.4658 49.9219 12.9977C50.221 13.5295 50.3706 14.0281 50.3706 14.4935ZM47.9773 10.5794C48.6753 9.98103 49.0244 9.391 49.0244 8.80929C49.0244 8.22757 48.6255 7.93671 47.8277 7.93671C47.4454 7.93671 47.1296 8.01981 46.8803 8.18602C46.631 8.3356 46.5064 8.51012 46.5064 8.70956C46.5064 9.07521 46.872 9.59045 47.6033 10.2553L47.9773 10.5794Z" fill="#55575F"/>
 </svg> */}
 
-<img className='h-16 rounded-full' src="./vite.svg" alt="img" />
+<img className='h-16 rounded-full' src="/muzzKart.png" alt="img" />
 </Link>
 
         </div>
@@ -107,16 +107,16 @@ function Navbar({isAdmin, setIsprofile, open, setOpen, count1 }) {
         
           className={`${
             isOpen ? 'block' : 'hidden'
-          } absolute top-[10vh] left-0 w-full  md:static md:flex md:items-center ml-32 md:justify-center md:space-x-6 z-20 shadow-lg sm:shadow-none bg-slate-300 sm:bg-white transition-all ease-in-out duration-300 md:w-auto`}
+          } absolute top-[10vh] left-0 w-full bg-slate-500 sm:bg-transparent  md:static md:flex md:items-center ml-32 md:justify-center md:space-x-6 z-20 shadow-lg sm:shadow-none  transition-all ease-in-out duration-300 md:w-auto`}
         >
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
             <Link to="/">Home</Link>
           </li>
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
-            <Link to="/shop">Shop</Link>
+            <Link to="/fashon">Fashion</Link>
           </li>
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
-            <Link to="/categories">Categories</Link>
+            <Link to="/furniture">Furnituresc</Link>
           </li>
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
             <Link to="/blog">Blog</Link>

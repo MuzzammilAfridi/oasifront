@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const OderPlaced = () => {
   const [userId, setUserId] = useState(null);
   const [email, setEmail] = useState(null);
-  const [name, setName] = useState(null)
+  const [name, setName] = useState(null);
   const [cart, setCart] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,16 +31,11 @@ const OderPlaced = () => {
   useEffect(() => {
     const fetchCart = async () => {
       if (!userId) return;
-  
+      
       try {
         const res = await axios.get(`https://oasback.onrender.com/product/cart/${userId}`);
-        console.log("Fetched Cart Data:", res.data.products[0]._id);  // Log fetched data
-  
         if (res.data && Array.isArray(res.data.products)) {
           setCart(res.data.products);
-
-          
-          
         } else {
           console.error("Cart data format is incorrect:", res.data);
           setCart([]);
@@ -47,103 +45,52 @@ const OderPlaced = () => {
         setCart([]);
       }
     };
-  
+    
     fetchCart();
   }, [userId]);
-  
-  
-  
-  
-  // const handleOrder = async () => {
-  //   if (!userId || !email || !Array.isArray(cart) || cart.length === 0) {
-  //     console.error("Invalid order data:", { userId, email, cart });
-  //     return;
-  //   }
-  
-  //   const orderData = {
-  //     customerId: userId,
-  //     customerName: "Aman",
-  //     email: email,
-  //     items: cart.map(item => ({
-  //       productId: item.productId,
-  //       itemName: item.itemName,
-  //       quantity: item.quantity,
-  //     })),
-  //     totalPrice: cart.reduce((total, item) => total + (item.price * item.quantity), 0),
-  //   };
-  
-  //   console.log("Sending order:", orderData); // Debug log before sending request
-  
-  //   try {
-  //     const res = await axios.post("http://localhost:7070/order/place", orderData);
-  //     console.log("Order placed successfully:", res.data);
-  //   } catch (error) {
-  //     console.error("Error placing order:", error.response?.data || error.message);
-  //   }
-  // };
-  
-  
-  
+
   const handleOrder = async () => {
     try {
-      // Fetch cart data
       const res = await axios.get(`https://oasback.onrender.com/product/cart/${userId}`);
-      const cart = res.data; // Assuming cart data contains products array and other details
+      const cart = res.data;
       
-      // Ensure the cart has products before proceeding
       if (!cart || !Array.isArray(cart.products) || cart.products.length === 0) {
         console.error('No products in cart.');
         return;
       }
   
-      // Build the orderData object
       const orderData = {
         customerId: userId,
         customerName: name,
         email: email,
         items: cart.products.map(product => ({
-          productId: product._id,  // Get the product _id from the cart
-          itemName: product.productId.name,  // Assuming product has a 'name' field
-          quantity: product.quantity || 1,  // Default to 1 if quantity is not provided
+          productId: product._id,
+          itemName: product.productId.name,
+          quantity: product.quantity || 1,
         })),
-        totalPrice: cart.totalPrice || 0,  // Assuming totalPrice is in cartData
+        totalPrice: cart.totalPrice || 0,
       };
   
-      // Log the order data to check its structure
       console.log("Sending order:", orderData);
   
-      // Send order data to the server
-      const response = await axios.post("https://oasback.onrender.com/order/place", orderData);
-      console.log(response.data);  // Check the response from the server
-  
+      await axios.post("https://oasback.onrender.com/order/place", orderData);
+      navigate('/my-order');
     } catch (error) {
       console.error("Error placing order:", error.response?.data || error);
     }
   };
   
-
-
-
-
-
   return (
-    <div>
-
-      {/* {console.log("This is cart id",cart._id)} */}
-      <div className="w-screen flex justify-center mt-16">
-        <img className="h-[127px] w-[127px]" src="./ordConf.png" alt="Order Confirmed" />
-      </div>
-      <div className="text-center px-10 flex gap-8 flex-col">
-        <p className="font-medium mt-5 text-[18px] leading-[21.73px] text-center text-[#2e2f33]">
-          Your Order is Confirmed
-        </p>
-        <p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800 p-6">
+      <div className="bg-white shadow-xl rounded-3xl p-8 flex flex-col items-center max-w-md w-full">
+        <img className="h-32 w-32" src="./ordConf.png" alt="Order Confirmed" />
+        <h2 className="text-2xl font-bold text-gray-900 mt-4">Your Order is Confirmed</h2>
+        <p className="text-gray-600 text-center mt-2 px-4">
           Thank you for shopping with us! Your beautiful new furniture is on its way and will be with you soon. Get ready to transform your space!
         </p>
-
         <button
           onClick={handleOrder}
-          className="w-[353px] h-[56px] bg-[#7c71df] text-[16px] leading-[19.36px] font-semibold py-3 text-white rounded-3xl mt-20"
+          className="mt-8 w-full bg-purple-600 text-white font-semibold py-3 rounded-xl text-lg transition-transform transform hover:scale-105 hover:bg-purple-700 shadow-md"
         >
           Done
         </button>

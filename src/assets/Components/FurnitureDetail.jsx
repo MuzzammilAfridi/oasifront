@@ -1,23 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ForgotPassword from "./ForgotPassword";
+import CreateAccount from "./CreateAccount";
+import LoginPage from "./LoginPage";
+import { addItem } from '../../features/counter/counterSlice';
+
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
-import axios from 'axios';
-import { addItem } from '../../features/counter/counterSlice';
-import LoginPage from './LoginPage';
-import CreateAccount from './CreateAccount';
-import ForgotPassword from './ForgotPassword';
 
-axios.defaults.withCredentials = true;
-
-const TopProductsDetails = ({ products }) => {
-  const [open, setOpen] = useState(false);
-  const [signUp, setSignUp] = useState(false);
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const [userId, setUserId] = useState();
-  const dispatch = useDispatch();
+const FurnitureDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const [fashionProducts, setFashionProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+   const [open, setOpen] = useState(false);
+    const [signUp, setSignUp] = useState(false);
+    const [forgotPassword, setForgotPassword] = useState(false);
+    const [userId, setUserId] = useState();
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("ID from URL:", id);
+  }, [id]);
+
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,12 +37,30 @@ const TopProductsDetails = ({ products }) => {
     fetchUser();
   }, []);
 
-  const product = products.find(e => e.id === parseInt(id) || e._id === id);
-
-  if (!products || products.length === 0) return <p className="text-center text-gray-600">Loading products...</p>;
-  if (!product) return <p className="text-center text-red-500">Product not found!</p>;
 
   const notifySuccess = () => toast.success("Product added successfully!");
+
+
+  useEffect(() => {
+    axios.get("https://oasback.onrender.com/product/allproducts")
+      .then((res) => {
+        const products = res.data.products || [];
+        setFashionProducts(products);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (fashionProducts.length > 0) {
+      console.log("Finding product with ID:", id);
+      console.log("Available products:", fashionProducts);
+    }
+  }, [fashionProducts, id]);
+
 
   const handleBuy = async () => {
     try {
@@ -57,6 +81,16 @@ const TopProductsDetails = ({ products }) => {
       setOpen(true);
     }
   };
+
+  const product = fashionProducts.find((e) => e._id === id);
+
+  if (loading) {
+    return <h2 className="text-center text-blue-500 text-xl mt-10">Loading...</h2>;
+  }
+
+  if (!product) {
+    return <h2 className="text-center text-red-500 text-xl mt-10">Item not found</h2>;
+  }
 
   return (
     <div className="w-full min-h-screen bg-cyan-100 flex flex-col items-center py-10 px-5">
@@ -101,4 +135,4 @@ const TopProductsDetails = ({ products }) => {
   );
 };
 
-export default TopProductsDetails;
+export default FurnitureDetail;

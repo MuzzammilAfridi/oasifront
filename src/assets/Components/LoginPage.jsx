@@ -1,33 +1,31 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { FaSpinner } from 'react-icons/fa';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { motion } from "framer-motion";
 
-function LoginPage({ setForgotPassword, setOpen, open, setSignUp, signUp }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // New loading state
+const LoginPage = ({ setForgotPassword, setOpen, open, setSignUp, signUp }) => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   axios.defaults.withCredentials = true;
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
-
+    setLoading(true);
     try {
-      const res = await axios.post('https://oasback.onrender.com/login', { email, password }, { withCredentials: true });
-
+      const res = await axios.post("https://oasback.onrender.com/login", { email, password }, { withCredentials: true });
       if (res.data.success) {
         if (res.data.admin) {
-          navigate('/admin');
+          navigate("/admin");
         }
         handleClose();
       }
     } catch (err) {
-      console.error('Login error:', err);
+      console.error("Login error:", err);
     } finally {
-      setLoading(false); // Stop loading after request is complete
+      setLoading(false);
     }
   };
 
@@ -49,64 +47,58 @@ function LoginPage({ setForgotPassword, setOpen, open, setSignUp, signUp }) {
   };
 
   return (
-    <div className="sm:w-[35vw] w-screen flex fixed right-0 top-0 flex-col gap-5 bg-gray-100 min-h-screen">
-      <div className="flex overflow-y-hidden border sm:w-[1/2] absolute top-0 right-0 justify-center min-h-screen">
-        <div className="w-full max-w-md p-8">
-          <button className="text-xl sm:relative sm:bottom-5 px-2 py-1 font-bold" onClick={handleClose}>
-            X
-          </button>
-          <h2 className="text-2xl sm:relative sm:bottom-5 font-bold mb-6 text-center">Login</h2>
-          <div className="flex sm:relative sm:bottom-5 flex-col justify-center items-center mb-6">
-            <img className="h-[127px] w-[127px] sm:h-[90px] sm:w-[90px]" src="./Plant.png" alt="img" />
-            <p className="text-center mt-2">Welcome back</p>
-          </div>
-          <form className="sm:space-y-2 space-y-4 sm:relative sm:bottom-8">
-            <div>
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="Enter your email"
-                className="w-[353px] h-[64px] sm:h-[40px] px-4 sm:py-2 py-3 border-[1.5px] rounded-3xl focus:outline-none focus:ring-2 focus:border-[#D6BBFB] transition duration-200 ease-in-out hover:border-[#D6BBFB] hover:shadow-xl"
-              />
-            </div>
-            <div>
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                placeholder="Password"
-                className="w-[353px] h-[64px] sm:h-[40px] px-4 sm:py-2 py-3 border-[1.5px] rounded-3xl focus:outline-none focus:ring-2 focus:border-[#D6BBFB] transition duration-200 ease-in-out hover:border-[#D6BBFB] hover:shadow-lg"
-              />
-              <button onClick={handleForgotPassword} className="text-sm text-blue-500 hover:underline mt-2 block">
-                Forgot Password?
-              </button>
-            </div>
-            <button
-              onClick={handleLogin}
-              type="submit"
-              disabled={loading} // Disable button while loading
-              className={`w-full sm:w-[353px] h-[56px] sm:h-[40px] bg-[#7c71df] text-white py-2 rounded-3xl transition ${
-                loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'
-              }`}
-            >
-              {loading ? <FaSpinner className="animate-spin mx-auto" /> : 'Login'}
-            </button>
-          </form>
-          <div className="my-3 sm:relative sm:bottom-5 sm:my-1 text-center">
-            <div className="text-center sm:relative sm:bottom-3">
-              <p className="text-sm text-gray-500">
-                First time here?{' '}
-                <button onClick={handleSignup} className="text-blue-500 hover:underline">
-                  Create an account
-                </button>
-              </p>
-            </div>
-          </div>
+    <motion.div 
+      className="fixed inset-0 flex items-center justify-center bg-gray-100"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div 
+        className="bg-cyan-200 shadow-xl rounded-2xl p-8 max-w-md w-full"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-800">Login</h2>
+          <button onClick={handleClose} className="text-2xl font-bold text-gray-600 hover:text-red-500">&times;</button>
         </div>
-      </div>
-    </div>
+        <div className="flex flex-col items-center">
+          <p className="text-gray-600 text-center mb-6">Welcome back! Please log in to continue.</p>
+        </div>
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button onClick={handleForgotPassword} className="text-sm text-blue-500 hover:underline mt-1">Forgot Password?</button>
+          <button
+            type="submit"
+            className={`w-full py-3 rounded-lg text-white font-medium transition duration-200 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <p className="text-center text-gray-500 mt-4">
+          New here? <button onClick={handleSignup} className="text-blue-500 hover:underline">Create an account</button>
+        </p>
+      </motion.div>
+    </motion.div>
   );
-}
+};
 
 export default LoginPage;

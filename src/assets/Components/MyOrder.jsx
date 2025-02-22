@@ -4,15 +4,9 @@ import UserDashboard from "./UserDashboard";
 
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [user, setUser] = useState([]);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   axios.defaults.withCredentials = true;
-
-
-  
-
-
 
   // Fetch user email
   useEffect(() => {
@@ -46,46 +40,59 @@ const MyOrder = () => {
     fetchOrders();
   }, [email]); // Re-run when email updates
 
-  return (
-    <div className="p-5 bg-black min-h-screen">
+  // Function to determine progress percentage
+  const getProgress = (status) => {
+    const stages = ["pending", "confirmed", "shipped", "delivered"];
+    return (stages.indexOf(status) / (stages.length - 1)) * 100;
+  };
 
-        {console.log(email)
-        }
-      <p className="text-4xl font-bold text-cyan-300 text-center mb-6">My Orders</p>
+  return (
+    <div className="p-5 bg-gray-100 min-h-screen">
+      <p className="text-4xl font-bold text-blue-700 text-center mb-6">My Orders</p>
+
       <div className="max-w-4xl mx-auto space-y-6">
         {orders.length === 0 ? (
-          <p className="text-white text-center">No orders found.</p>
+          <p className="text-gray-800 text-center">No orders found.</p>
         ) : (
           orders.map((order) => (
-            <div key={order._id} className="border border-cyan-500 p-5 rounded-lg shadow-lg bg-gray-900">
-              <p className="text-cyan-400 font-bold text-lg">Order ID: <span className="text-white">{order._id}</span></p>
-              <p className="text-white mt-2">👤 Customer: <span className="font-semibold">{order.customerName}</span></p>
-              <p className="text-white">📧 Email: <span className="font-semibold">{order.email}</span></p>
-              <p className="text-green-400 font-semibold mt-2">💰 Total Price: ${order.totalPrice.toFixed(2)}</p>
-              <p className="text-gray-400 text-sm">📅 Created At: {new Date(order.createdAt).toLocaleString()}</p>
+            <div key={order._id} className="border border-gray-300 p-5 rounded-lg shadow-md bg-white">
+              <p className="text-blue-600 font-bold text-lg">Order ID: <span className="text-gray-800">{order._id}</span></p>
+              <p className="text-gray-800 mt-2">👤 Customer: <span className="font-semibold">{order.customerName}</span></p>
+              <p className="text-gray-700">📧 Email: <span className="font-semibold">{order.email}</span></p>
+              <p className="text-green-600 font-semibold mt-2">💰 Total Price: ${order.totalPrice.toFixed(2)}</p>
+              <p className="text-gray-500 text-sm">📅 Created At: {new Date(order.createdAt).toLocaleString()}</p>
 
-              <p className="text-cyan-300 font-semibold mt-4">🛒 Products Ordered:</p>
-              <ul className="list-none text-white mt-2 space-y-2">
-                {order.items.map((item, index) => (
-                  <li key={index} className="bg-gray-800 px-4 py-2 rounded-md shadow">
-                    <span className="text-cyan-400 font-medium">{item.itemName || "Unknown Product"}</span> -
-                    <span className="text-yellow-300"> {item.quantity}</span>
+              <p className="text-blue-600 font-semibold mt-4">🛒 Products Ordered:</p>
+              <ul className="list-none text-gray-800 mt-2 space-y-2">
+                {order.items.map(({ itemName, quantity }, index) => (
+                  <li key={index} className="bg-gray-200 px-4 py-2 rounded-md shadow-sm">
+                    <span className="text-blue-700 font-medium">{itemName || "Unknown Product"}</span> - 
+                    <span className="text-yellow-600"> {quantity}</span>
                   </li>
                 ))}
               </ul>
 
-              <p className="text-cyan-300 font-semibold mt-4">📦 Order Status:
-                <span className="text-yellow-300"> {order.status}</span>
-              </p>
+              {/* Order Progress Bar */}
+              <div className="mt-4">
+                <p className="text-blue-600 font-semibold mb-2">📦 Order Progress:</p>
+                <div className="relative w-full bg-gray-300 rounded-full h-4">
+                  <div
+                    className={`h-4 rounded-full transition-all duration-500 ${
+                      order.status === "pending" ? "bg-gray-400" :
+                      order.status === "confirmed" ? "bg-blue-500" :
+                      order.status === "shipped" ? "bg-yellow-500" : "bg-green-500"
+                    }`}
+                    style={{ width: `${getProgress(order.status)}%` }}
+                  ></div>
+                </div>
+                <p className="text-center text-gray-700 mt-1">{order.status.toUpperCase()}</p>
+              </div>
             </div>
           ))
         )}
       </div>
 
-        <UserDashboard/>
-
-        <p className="text-5xl text-white">Hii</p>
-
+      {/* <UserDashboard /> */}
     </div>
   );
 };
