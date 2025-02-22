@@ -29,6 +29,9 @@ import Profile from './assets/Components/Profile.jsx'
 import Address from './assets/Components/Address.jsx'
 import MyOrder from './assets/Components/MyOrder.jsx'
 import AddressDetails from './assets/Components/AddressDetails.jsx'
+import FashionComponent from './assets/Components/FashionComponent.jsx'
+import FashionDetail from './assets/Components/FashionDetail.jsx'
+import FurnitureComponent from './assets/Components/FurnitureComponent.jsx'
 // import { Counter } from './features/counter/Counter'
 // import Design from './assets/Components/Design'
 
@@ -174,6 +177,54 @@ function App() {
       name : "Faux Leat...",
       price : 129
     },
+    {
+      id: 23,
+      name: 'Elegant Dress',
+      img: '/fashon-01.jpeg',
+      price: '120',
+    },
+    {
+      id: 24,
+      name: 'Classic Suit',
+      img: '/fashon-02.webp',
+      price: '250',
+    },
+    {
+      id: 25,
+      name: 'Trendy Jacket',
+      img: '/fashon-03.webp',
+      price: '180',
+    },
+    {
+      id: 26,
+      name: 'Stylish Sneakers',
+      img: '/fashon-04.webp',
+      price: '95',
+    },
+    {
+      id: 27,
+      name: 'Elegant Dress',
+      img: '/fashon-01.jpeg',
+      price: '120',
+    },
+    {
+      id: 28,
+      name: 'Classic Suit',
+      img: '/fashon-02.webp',
+      price: '250',
+    },
+    {
+      id: 29,
+      name: 'Trendy Jacket',
+      img: '/fashon-03.webp',
+      price: '180',
+    },
+    {
+      id: 30,
+      name: 'Stylish Sneakers',
+      img: '/fashon-04.webp',
+      price: '95',
+    },
   ]
 
   
@@ -184,7 +235,7 @@ function App() {
 
 
   useEffect(()=>{
-    const data = axios.get("https://oasback.onrender.com/product/allproducts").then((res)=>{
+    const data = axios.get("http://localhost:7070/product/allproducts").then((res)=>{
       // console.log(res.data.products);
       setProducts([...topProductsData, ...res.data.products])
 
@@ -344,7 +395,7 @@ function App() {
       <Route path='/blog' element={<ArticleHero articleData={articleData}/>}/>
       <Route path='/categories' element={<Categories/>}/>
       <Route path='/sittingRoom'  element={<SittingRoom  products={products}/>}/>
-      <Route path='/buy' element={<SuccessPage/>}/>
+      <Route path='/buy' element={<OderPlaced/>}/>
       <Route path='/reset-password/:token' element={<ResetPassword/>}/>
 
       <Route path="/:id" element={<TopProductsDetails products={products}/>} />
@@ -354,6 +405,10 @@ function App() {
       <Route path='/address' element={<Address/>}/>
       <Route path='/my-order' element={<MyOrder/>}/>
       <Route path='/address-details' element={<AddressDetails/>}/>
+      <Route path='/fashon' element={<FashionComponent/>}/>
+      <Route path='/furniture' element={<FurnitureComponent/>}/>
+      <Route path="/fashion/:id" element={<FashionDetail />} />
+      <Route path="/furniture/:id" element={<FashionDetail />} />
 
 
 

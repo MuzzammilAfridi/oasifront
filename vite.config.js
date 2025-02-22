@@ -8,8 +8,12 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: [],
+      external: [], // No external dependencies
     },
     outDir: "dist",
   },
+  server: {
+    historyApiFallback: true, // Fixes 404 on refresh in SPA
+  },
+ 
 });
