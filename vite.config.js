@@ -6,8 +6,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ["framer-motion", "@stripe/stripe-js"], // ✅ Combine both into an array
+      external: ["@stripe/stripe-js"], // Keep only necessary externals
     },
+    
     outDir: 'dist', // Default output directory
   },
 })
