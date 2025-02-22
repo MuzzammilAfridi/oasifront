@@ -12,7 +12,7 @@ const CartList = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:7070/user", {
+        const res = await axios.get("https://oasifront.onrender.com/user", {
           withCredentials: true,
         });
         if (res.data.user?._id) setUserId(res.data.user._id);
@@ -32,7 +32,7 @@ const CartList = () => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:7070/product/cart/${userId}`);
+      const res = await axios.get(`https://oasifront.onrender.com/product/cart/${userId}`);
       setCart(res.data);
       
     } catch (err) {
@@ -46,7 +46,7 @@ const CartList = () => {
     if (!userId) return;
     
     try {
-      const res = await axios.put(`http://localhost:7070/product/cart/update`, {
+      const res = await axios.put(`https://oasifront.onrender.com/product/cart/update`, {
         userId, // Ensure userId is sent
         productId, // Ensure productId is sent
         type, // "increase" or "decrease"
