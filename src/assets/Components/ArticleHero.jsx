@@ -1,6 +1,7 @@
 import React from 'react';
 import LatestArticle from './LatestArticle';
-import { motion } from "framer-motion";
+import { motion } from "framer-motion/dist/framer-motion";
+
 
 const ArticleHero = ({ articleData }) => {
   return (

@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion/dist/framer-motion";
+
 import SlidingAnimation from './SlidingAnimation';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
