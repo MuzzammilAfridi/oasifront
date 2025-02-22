@@ -102,7 +102,7 @@ const AddressDetails = () => {
     const headers = { "Content-Type": "application/json" };
   
     try {
-      const response = await fetch("https://oasback.onrender.com/create-checkout-session", {
+      const response = await fetch("https://oasback.onrender.com/product/create-checkout-session", {
         method: "POST",
         headers,
         body: JSON.stringify(body),
