@@ -26,6 +26,7 @@ const LoginPage = ({ setForgotPassword, setOpen, open, setSignUp, signUp }) => {
       }
     } catch (err) {
       console.error("Login error:", err);
+      alert(err.response.data.message);
     } finally {
       setLoading(false);
     }
