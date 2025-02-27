@@ -113,10 +113,13 @@ function Navbar({isAdmin, setIsprofile, open, setOpen, count1 }) {
             <Link to="/">Home</Link>
           </li>
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
-            <Link to="/fashon">Fashion</Link>
+            <Link to="/fashion">Fashion</Link>
           </li>
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
-            <Link to="/furniture">Furnituresc</Link>
+            <Link to="/furniture">Furnitures</Link>
+          </li>
+          <li className="py-2 px-4 md:px-0 hover:text-blue-500">
+            <Link to="/electronics">Electronics</Link>
           </li>
           <li className="py-2 px-4 md:px-0 hover:text-blue-500">
             <Link to="/blog">Blog</Link>

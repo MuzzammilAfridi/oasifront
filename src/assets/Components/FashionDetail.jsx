@@ -5,30 +5,28 @@ import ForgotPassword from "./ForgotPassword";
 import CreateAccount from "./CreateAccount";
 import LoginPage from "./LoginPage";
 import { addItem } from '../../features/counter/counterSlice';
-
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
+import ProductRecommendation from "./ProductRecommendation";
 
 const FashionDetail = () => {
   const { id } = useParams();
   const [fashionProducts, setFashionProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-   const [open, setOpen] = useState(false);
-    const [signUp, setSignUp] = useState(false);
-    const [forgotPassword, setForgotPassword] = useState(false);
-    const [userId, setUserId] = useState();
-    const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [signUp, setSignUp] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [userId, setUserId] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("ID from URL:", id);
   }, [id]);
 
-
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("https://oasback.onrender.com/user");
+        const res = await axios.get("https://oasback.onrender.com//user");
         setUserId(res.data.user._id);
       } catch (err) {
         console.error("Error fetching user:", err);
@@ -37,9 +35,7 @@ const FashionDetail = () => {
     fetchUser();
   }, []);
 
-
   const notifySuccess = () => toast.success("Product added successfully!");
-
 
   useEffect(() => {
     axios.get("https://oasback.onrender.com/product/allproducts")
@@ -60,7 +56,6 @@ const FashionDetail = () => {
       console.log("Available products:", fashionProducts);
     }
   }, [fashionProducts, id]);
-
 
   const handleBuy = async () => {
     try {
@@ -108,18 +103,26 @@ const FashionDetail = () => {
           <p className="text-gray-500 mt-2">Rating ⭐⭐⭐⭐⭐</p>
 
           <div className="flex items-center gap-4 mt-3">
-            <span className="text-xl font-bold text-indigo-600">${product.price}</span>
-            <span className="text-gray-400 line-through">$199.00</span>
-            <span className="px-3 py-1 bg-red-100 text-red-500 rounded-lg">-40%</span>
-          </div>
 
-          <p className="mt-4 text-gray-600 leading-relaxed">Ultra-functional and elegantly minimalist, our Luxe Armchair Collection draws inspiration from Nordic-style décor.</p>
+  
+  <div className="flex items-center gap-4 mt-3">
+  <span className="text-xl font-bold text-indigo-600">${product.price}</span>
 
-          <div className="flex gap-3 mt-4">
-            <span className="w-10 h-10 bg-gray-400 rounded-md"></span>
-            <span className="w-10 h-10 bg-brown-400 rounded-md"></span>
-            <span className="w-10 h-10 bg-blue-400 rounded-md"></span>
-          </div>
+  {/* Calculate original price before discount (assuming a fixed 40% discount) */}
+  <span className="text-gray-400 line-through">
+    ${(product.price * 1.67).toFixed(2)}
+  </span>
+
+  {/* Show the discount percentage as 40% */}
+  <span className="px-3 py-1 bg-red-100 text-red-500 rounded-lg">
+    -40%
+  </span>
+</div>
+
+</div>
+
+
+          <p className="mt-4 text-gray-600 leading-relaxed">{product.description}</p>
 
           <button 
             onClick={handleBuy}
@@ -131,6 +134,7 @@ const FashionDetail = () => {
           <p className="text-sm text-gray-500">Made from premium materials</p>
         </div>
       </div>
+      <ProductRecommendation/>
     </div>
   );
 };

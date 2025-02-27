@@ -8,7 +8,7 @@ const MyOrder = () => {
 
   axios.defaults.withCredentials = true;
 
-  // Fetch user email
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -23,9 +23,9 @@ const MyOrder = () => {
     fetchUser();
   }, []);
 
-  // Fetch user orders only after email is set
+
   useEffect(() => {
-    if (!email) return; // Prevent running if email is empty
+    if (!email) return; 
 
     const fetchOrders = async () => {
       try {

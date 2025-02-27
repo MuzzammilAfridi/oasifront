@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const FurnitureComponent = () => {
-  const [furnitureProducts, setFurnitureProducts] = useState([]);
+const ElectronicsComponent = () => {
+  const [electronicsProducts, setElectronicsProducts] = useState([]);
 
   useEffect(() => {
     axios
       .get("https://oasback.onrender.com/product/allproducts")
       .then((res) => {
+        console.log(res.data.products);
         const products = res.data.products || [];
         const filteredItems = products.filter(
-          (item) => item.category === "Furniture"
+          (item) => item.category === "Electronics"
         );
-
-        setFurnitureProducts(filteredItems);
-        console.log("Filtered Furniture Products:", filteredItems);
+        setElectronicsProducts(filteredItems);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -28,22 +27,22 @@ const FurnitureComponent = () => {
       {/* Hero Section */}
       <div className="relative w-full h-96 rounded-xl shadow-lg mb-10 overflow-hidden">
         <img 
-          src="./furniture-3.webp" 
-          alt="Latest Furniture" 
+          src="./Mobiles.webp" 
+          alt="Latest Electronics" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center p-6">
-          <h1 className="text-5xl font-bold">Elegant Furniture</h1>
-          <p className="mt-3 text-lg">Discover timeless and stylish furniture for your space.</p>
-        </div>
+        {/* <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white text-center p-6">
+          <h1 className="text-5xl font-bold">Latest Electronics</h1>
+          <p className="mt-3 text-lg">Discover the best gadgets and devices at unbeatable prices.</p>
+        </div> */}
       </div>
 
       <h2 className="text-4xl font-bold text-center mb-10 text-gray-800 uppercase">
-        Trending Furniture
+        Trending Electronics
       </h2>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-        {furnitureProducts.map((item) => (
+        {electronicsProducts.map((item) => (
           <Link to={`/${item._id}`} key={item._id} className="w-full">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -105,4 +104,4 @@ const FurnitureComponent = () => {
   );
 };
 
-export default FurnitureComponent;
+export default ElectronicsComponent;

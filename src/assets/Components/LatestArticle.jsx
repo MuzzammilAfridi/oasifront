@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
 
-
 const LatestArticle = ({ articleData }) => {
   return (
     <motion.div 

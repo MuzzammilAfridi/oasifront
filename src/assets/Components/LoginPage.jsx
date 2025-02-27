@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 
-
-
 const LoginPage = ({ setForgotPassword, setOpen, open, setSignUp, signUp }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -18,6 +16,8 @@ const LoginPage = ({ setForgotPassword, setOpen, open, setSignUp, signUp }) => {
     setLoading(true);
     try {
       const res = await axios.post("https://oasback.onrender.com/login", { email, password }, { withCredentials: true });
+      alert(res.data.message);
+      
       if (res.data.success) {
         if (res.data.admin) {
           navigate("/admin");
@@ -27,6 +27,7 @@ const LoginPage = ({ setForgotPassword, setOpen, open, setSignUp, signUp }) => {
     } catch (err) {
       console.error("Login error:", err);
       alert(err.response.data.message);
+
     } finally {
       setLoading(false);
     }

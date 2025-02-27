@@ -32,6 +32,9 @@ import AddressDetails from './assets/Components/AddressDetails.jsx'
 import FashionComponent from './assets/Components/FashionComponent.jsx'
 import FashionDetail from './assets/Components/FashionDetail.jsx'
 import FurnitureComponent from './assets/Components/FurnitureComponent.jsx'
+import ProductList from './assets/Components/ProductList.jsx'
+import SearchBar from './assets/Components/SearchBar.jsx'
+import ElectronicsComponent from './assets/Components/ElectronicsComponent.jsx'
 // import { Counter } from './features/counter/Counter'
 // import Design from './assets/Components/Design'
 
@@ -41,6 +44,23 @@ function App() {
   const [products, setProducts] = useState([])
 
   const [isAdmin, setIsAdmin] = useState(false)
+
+
+  const [searchProducts, setSearchhProducts] = useState([]);
+
+  const handleSearch = async (query) => {
+    if (!query) {
+      setProducts([]);
+      return;
+    }
+
+    try {
+      const response = await axios.get(`https://oasback.onrender.com/product/search?query=${query}`);
+      setSearchhProducts(response.data);
+    } catch (error) {
+      console.error("Search failed:", error);
+    }
+  };
 
   
 // console.log(products)
@@ -295,21 +315,7 @@ function App() {
     },
   ]
 
-  const cartData = [
-    {
-      img: "./article-07.jpeg",
-      name : "Luxe Armchair - Left Arm Chute",
-      price : 899,
-    },
-    {
-      img: "./article-07.jpeg",
-      name : "Luxe Armchair - Left Arm Chute",
-      price : 899,
-    },
-    
   
-    
-  ]
 
 
   const designData = [
@@ -357,6 +363,8 @@ function App() {
     
     <div className="overflow-x-clip max-w-[100vw] mx-auto">
       <Navbar setOpen={setOpen} setIsprofile={setIsprofile} isAdmin={isAdmin} count1={count1} open={open} />
+      <SearchBar onSearch={handleSearch} />
+     
       {/* <Counter/> */}
 
       {/* {console.log(open)} */}
@@ -400,16 +408,17 @@ function App() {
 
       <Route path="/:id" element={<TopProductsDetails products={products}/>} />
       <Route path="/product/:id" element={<TopProductsDetails setForgotPassword={setForgotPassword} products={products} />} />
-
+      {/* <Route path="/product/:productId" element={<ProductDetails />} /> */}
       <Route path='/admin' element={<Admin/>}/>
       <Route path='/address' element={<Address/>}/>
       <Route path='/my-order' element={<MyOrder/>}/>
       <Route path='/address-details' element={<AddressDetails/>}/>
-      <Route path='/fashon' element={<FashionComponent/>}/>
-      <Route path='/furniture' element={<FurnitureComponent/>}/>
-      <Route path="/fashion/:id" element={<FashionDetail />} />
-      <Route path="/furniture/:id" element={<FashionDetail />} />
-
+      <Route path='/fashion' element={<FashionComponent/>}/>
+      <Route path='/furniture' element={<FurnitureComponent searchProducts={searchProducts}/>}/>
+      {/* <Route path="/fashion/:id" element={<FashionDetail />} />
+      <Route path="/furniture/:id" element={<FashionDetail />} /> */}
+      <Route path="/products" element={<ProductList />} />
+      <Route path="/electronics" element={<ElectronicsComponent />} />
 
 
 

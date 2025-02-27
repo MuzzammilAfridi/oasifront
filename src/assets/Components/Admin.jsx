@@ -50,7 +50,7 @@ const Admin = () => {
     }
 
     // Initialize Socket.IO connection
-    const newSocket = io("https://oasback.onrender.com"); // Connect to backend
+    const newSocket = io("https://oasback.onrender.com"); 
     setSocket(newSocket);
 
     // Check if connected successfully
@@ -70,7 +70,7 @@ const Admin = () => {
         });
 
         notification.onclick = () => {
-          window.open("https://oasback.onrender.com/", "_blank");
+          window.open("https://oasis-rho-pink.vercel.app/", "_blank");
         };
       } else {
         console.warn("🚨 Notifications are blocked by the user.");

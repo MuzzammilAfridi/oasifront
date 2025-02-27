@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 
-
 const TopProducts = ({ products }) => {
   return (
     <div className="px-[15px] w-full min-h-fit py-[30px] bg-gradient-to-b from-cyan-50 to-cyan-100 mx-auto">

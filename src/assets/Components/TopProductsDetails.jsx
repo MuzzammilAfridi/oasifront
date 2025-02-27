@@ -7,6 +7,7 @@ import { addItem } from '../../features/counter/counterSlice';
 import LoginPage from './LoginPage';
 import CreateAccount from './CreateAccount';
 import ForgotPassword from './ForgotPassword';
+import ProductRecommendation from './ProductRecommendation';
 
 axios.defaults.withCredentials = true;
 
@@ -74,18 +75,26 @@ const TopProductsDetails = ({ products }) => {
           <p className="text-gray-500 mt-2">Rating ⭐⭐⭐⭐⭐</p>
 
           <div className="flex items-center gap-4 mt-3">
-            <span className="text-xl font-bold text-indigo-600">${product.price}</span>
-            <span className="text-gray-400 line-through">$199.00</span>
-            <span className="px-3 py-1 bg-red-100 text-red-500 rounded-lg">-40%</span>
-          </div>
 
-          <p className="mt-4 text-gray-600 leading-relaxed">Ultra-functional and elegantly minimalist, our Luxe Armchair Collection draws inspiration from Nordic-style décor.</p>
+  
+  <div className="flex items-center gap-4 mt-3">
+  <span className="text-xl font-bold text-indigo-600">${product.price}</span>
 
-          <div className="flex gap-3 mt-4">
-            <span className="w-10 h-10 bg-gray-400 rounded-md"></span>
-            <span className="w-10 h-10 bg-brown-400 rounded-md"></span>
-            <span className="w-10 h-10 bg-blue-400 rounded-md"></span>
-          </div>
+  {/* Calculate original price before discount (assuming a fixed 40% discount) */}
+  <span className="text-gray-400 line-through">
+    ${(product.price * 1.67).toFixed(2)}
+  </span>
+
+  {/* Show the discount percentage as 40% */}
+  <span className="px-3 py-1 bg-red-100 text-red-500 rounded-lg">
+    -40%
+  </span>
+</div>
+
+</div>
+
+
+          <p className="mt-4 text-gray-600 leading-relaxed">{product.description}</p>
 
           <button 
             onClick={handleBuy}
@@ -97,6 +106,8 @@ const TopProductsDetails = ({ products }) => {
           <p className="text-sm text-gray-500">Made from premium materials</p>
         </div>
       </div>
+<ProductRecommendation/>
+      
     </div>
   );
 };

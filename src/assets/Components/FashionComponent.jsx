@@ -1,121 +1,100 @@
 import { motion } from "framer-motion";
-
-import SlidingAnimation from './SlidingAnimation';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-
-
-const fashionItems = [
-  {
-    id: 23,
-    name: 'Elegant Dress',
-    image: './fashon-01.jpeg',
-    price: '$120',
-  },
-  {
-    id: 24,
-    name: 'Classic Suit',
-    image: './fashon-02.webp',
-    price: '$250',
-  },
-  {
-    id: 25,
-    name: 'Trendy Jacket',
-    image: './fashon-03.webp',
-    price: '$180',
-  },
-  {
-    id: 26,
-    name: 'Stylish Sneakers',
-    image: './fashon-04.webp',
-    price: '$95',
-  },
-  {
-    id: 27,
-    name: 'Elegant Dress',
-    image: './fashon-01.jpeg',
-    price: '$120',
-  },
-  {
-    id: 28,
-    name: 'Classic Suit',
-    image: './fashon-02.webp',
-    price: '$250',
-  },
-  {
-    id: 29,
-    name: 'Trendy Jacket',
-    image: './fashon-03.webp',
-    price: '$180',
-  },
-  {
-    id: 30,
-    name: 'Stylish Sneakers',
-    image: './fashon-04.webp',
-    price: '$95',
-  },
-];
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const FashionComponent = () => {
-
   const [fashionProducts, setFashionProducts] = useState([]);
 
- useEffect(() => {
-  axios.get("https://oasback.onrender.com/product/allproducts")
-    .then((res) => {
-      const products = res.data.products || []; // Ensure it's an array
-      const furnitureItems = products.filter((item) => item.category === "Fashion");
-
-      setFashionProducts(furnitureItems); // Only store "Furniture" products
-      console.log("Filtered Furniture Products:", furnitureItems);
-    })
-    .catch((error) => {
-      console.error("Error fetching products:", error);
-    });
-}, []);
-
-  
-
+  useEffect(() => {
+    axios
+      .get("https://oasback.onrender.com/product/allproducts")
+      .then((res) => {
+        const products = res.data.products || [];
+        const filteredItems = products.filter((item) => item.category === "Fashion");
+        setFashionProducts(filteredItems);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
-      <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">Trending Fashion</h2>
+    <div className="min-h-screen bg-gray-50 py-12 px-6">
+      {/* Hero Section */}
+      <div className="relative w-full h-96 rounded-xl shadow-lg mb-10 overflow-hidden">
+        <img 
+          src="./faishon-3.webp" 
+          alt="Trending Fashion" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center p-6">
+          <h1 className="text-5xl font-bold">Trending Fashion</h1>
+          <p className="mt-3 text-lg">Explore the latest styles and fashion trends.</p>
+        </div>
+      </div>
 
-      {/* <SlidingAnimation/> */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 max-w-6xl mx-auto">
+      <h2 className="text-4xl font-bold text-center mb-10 text-gray-800 uppercase">
+        Latest Arrivals
+      </h2>
+
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         {fashionProducts.map((item) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            whileHover={{ scale: 1.1, rotate: 1 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer transition-all"
-          >
-          <Link to={`/fashion/${item._id}`} className="w-full">
-  <motion.img 
-    src={item.img} 
-    alt={item.name} 
-    className="w-full h-72 object-cover" 
-    whileHover={{ scale: 1.05 }}
-  />
-</Link>
-            <div className="p-4 text-center">
-              <h3 className="text-xl font-semibold text-gray-800">{item.name}</h3>
-              <p className="text-lg text-gray-500 mt-1">{item.price}</p>
-              <motion.button 
-                className="mt-4 bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                Shop Now
-              </motion.button>
-            </div>
-          </motion.div>
+          <Link to={`/${item._id}`} key={item._id} className="w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer transition-all hover:shadow-2xl"
+            >
+              {/* Product Image Section */}
+              <div className="relative w-full h-64 overflow-hidden">
+                <motion.img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full h-full object-cover rounded-t-xl transition-transform duration-300"
+                  whileHover={{ scale: 1.1 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              </div>
+
+              {/* Product Details */}
+              <div className="p-5 bg-white rounded-b-xl text-center">
+                <h3 className="text-xl font-semibold text-gray-900 truncate">
+                  {item.name}
+                </h3>
+                <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                  {item.description}
+                </p>
+                <p className="text-lg font-semibold text-pink-600 mt-2">
+                  ${item.price}
+                </p>
+
+                {/* Extra Thumbnail Images */}
+                <div className="flex justify-center gap-2 mt-3">
+                  {item.extraImages?.map((img, index) => (
+                    <motion.img
+                      key={index}
+                      src={img}
+                      alt="Extra"
+                      className="w-12 h-12 rounded-md border border-gray-300 object-cover cursor-pointer"
+                      whileHover={{ scale: 1.1 }}
+                    />
+                  ))}
+                </div>
+
+                {/* Shop Now Button */}
+                <motion.button
+                  className="mt-4 w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-2 rounded-lg font-medium shadow-md hover:from-pink-600 hover:to-red-600 transition"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  Shop Now
+                </motion.button>
+              </div>
+            </motion.div>
+          </Link>
         ))}
       </div>
     </div>

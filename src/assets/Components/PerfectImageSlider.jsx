@@ -1,14 +1,12 @@
-// src/components/PerfectImageSlider.jsx
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const images = [
-  './electronics-2.webp',
-  './electronics.webp',
-  './faishon-2.webp',
-  './faishon.webp',
-  './makeup.webp',
-  './sports.webp',
-  './travel.webp',
+  { src: "./electronics-2.webp", path: "/electronics" },
+  { src: "./electronics.webp", path: "/electronics" },
+  { src: "./faishon-2.webp", path: "/fashion" },
+  { src: "./faishon.webp", path: "/fashion" },
+  { src: "./furniture.webp", path: "/furniture" }
 ];
 
 const PerfectImageSlider = () => {
@@ -27,7 +25,7 @@ const PerfectImageSlider = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 4000);  
+    const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -39,11 +37,13 @@ const PerfectImageSlider = () => {
       >
         {images.map((image, index) => (
           <div key={index} className="w-full h-[70vh] flex-shrink-0">
-            <img
-              src={image}
-              alt={`Slide ${index + 1}`}
-              className="w-full h-full object-cover"
-            />
+            <Link to={image.path}>
+              <img
+                src={image.src}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-cover cursor-pointer"
+              />
+            </Link>
           </div>
         ))}
       </div>
