@@ -64,188 +64,188 @@ function App() {
 
   
 // console.log(products)
-  const topProductsData = [
-    {
-      id: 1,
-      img : './top-01.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-  // { id: 1, name: 'Apple', price: 20 },
+  // const topProductsData = [
+  //   {
+  //     id: 1,
+  //     img : './top-01.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  // // { id: 1, name: 'Apple', price: 20 },
 
-    {
-      id: 2,
-      img : './top-02.png',
-      name : "Faux Leat...",
-      price : 129,
-      qnt : 1
-    },
-    {
-      id: 3,
-      img : './top-03.png',
-      name : "Faux Leat...",
-      price : 129,
-      qnt : 1
-    },
-    {
-      id: 4,
-      img : './top-04.png',
-      name : "Faux Leat...",
-      price : 129,
-      qnt : 1
-    },
-    {
-      id: 5,
-      img : './top-05.png',
-      name : "Faux Leat...",
-      price : 129,
-      qnt : 1
-    },
-    {
-      id:6,
-      img : './top-06.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:7,
-      img : './top-07.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:8,
-      img : './top-08.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:9,
-      img : './top-09.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:10,
-      img : './Top-10.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:11,
-      img : './top-11.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:12,
-      img : './top-12.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:13,
-      img : './top-13.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:14,
-      img : './top-14.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:15,
-      img : './top-15.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:16,
-      img : './top-16.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:18,
-      img : './top-17.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:19,
-      img : './top-18.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:20,
-      img : './top-19.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:21,
-      img : './top-20.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id:22,
-      img : './top-21.png',
-      name : "Faux Leat...",
-      price : 129
-    },
-    {
-      id: 23,
-      name: 'Elegant Dress',
-      img: '/fashon-01.jpeg',
-      price: '120',
-    },
-    {
-      id: 24,
-      name: 'Classic Suit',
-      img: '/fashon-02.webp',
-      price: '250',
-    },
-    {
-      id: 25,
-      name: 'Trendy Jacket',
-      img: '/fashon-03.webp',
-      price: '180',
-    },
-    {
-      id: 26,
-      name: 'Stylish Sneakers',
-      img: '/fashon-04.webp',
-      price: '95',
-    },
-    {
-      id: 27,
-      name: 'Elegant Dress',
-      img: '/fashon-01.jpeg',
-      price: '120',
-    },
-    {
-      id: 28,
-      name: 'Classic Suit',
-      img: '/fashon-02.webp',
-      price: '250',
-    },
-    {
-      id: 29,
-      name: 'Trendy Jacket',
-      img: '/fashon-03.webp',
-      price: '180',
-    },
-    {
-      id: 30,
-      name: 'Stylish Sneakers',
-      img: '/fashon-04.webp',
-      price: '95',
-    },
-  ]
+  //   {
+  //     id: 2,
+  //     img : './top-02.png',
+  //     name : "Faux Leat...",
+  //     price : 129,
+  //     qnt : 1
+  //   },
+  //   {
+  //     id: 3,
+  //     img : './top-03.png',
+  //     name : "Faux Leat...",
+  //     price : 129,
+  //     qnt : 1
+  //   },
+  //   {
+  //     id: 4,
+  //     img : './top-04.png',
+  //     name : "Faux Leat...",
+  //     price : 129,
+  //     qnt : 1
+  //   },
+  //   {
+  //     id: 5,
+  //     img : './top-05.png',
+  //     name : "Faux Leat...",
+  //     price : 129,
+  //     qnt : 1
+  //   },
+  //   {
+  //     id:6,
+  //     img : './top-06.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:7,
+  //     img : './top-07.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:8,
+  //     img : './top-08.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:9,
+  //     img : './top-09.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:10,
+  //     img : './Top-10.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:11,
+  //     img : './top-11.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:12,
+  //     img : './top-12.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:13,
+  //     img : './top-13.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:14,
+  //     img : './top-14.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:15,
+  //     img : './top-15.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:16,
+  //     img : './top-16.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:18,
+  //     img : './top-17.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:19,
+  //     img : './top-18.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:20,
+  //     img : './top-19.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:21,
+  //     img : './top-20.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id:22,
+  //     img : './top-21.png',
+  //     name : "Faux Leat...",
+  //     price : 129
+  //   },
+  //   {
+  //     id: 23,
+  //     name: 'Elegant Dress',
+  //     img: '/fashon-01.jpeg',
+  //     price: '120',
+  //   },
+  //   {
+  //     id: 24,
+  //     name: 'Classic Suit',
+  //     img: '/fashon-02.webp',
+  //     price: '250',
+  //   },
+  //   {
+  //     id: 25,
+  //     name: 'Trendy Jacket',
+  //     img: '/fashon-03.webp',
+  //     price: '180',
+  //   },
+  //   {
+  //     id: 26,
+  //     name: 'Stylish Sneakers',
+  //     img: '/fashon-04.webp',
+  //     price: '95',
+  //   },
+  //   {
+  //     id: 27,
+  //     name: 'Elegant Dress',
+  //     img: '/fashon-01.jpeg',
+  //     price: '120',
+  //   },
+  //   {
+  //     id: 28,
+  //     name: 'Classic Suit',
+  //     img: '/fashon-02.webp',
+  //     price: '250',
+  //   },
+  //   {
+  //     id: 29,
+  //     name: 'Trendy Jacket',
+  //     img: '/fashon-03.webp',
+  //     price: '180',
+  //   },
+  //   {
+  //     id: 30,
+  //     name: 'Stylish Sneakers',
+  //     img: '/fashon-04.webp',
+  //     price: '95',
+  //   },
+  // ]
 
   
 
@@ -257,7 +257,7 @@ function App() {
   useEffect(()=>{
     const data = axios.get("https://oasback.onrender.com/product/allproducts").then((res)=>{
       // console.log(res.data.products);
-      setProducts([...topProductsData, ...res.data.products])
+      setProducts(res.data.products)
 
       
       
