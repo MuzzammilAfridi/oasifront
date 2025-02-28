@@ -23,7 +23,7 @@ const ElectronicsComponent = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
+    <div className="min-h-screen flex flex-col items-center bg-gray-50 py-12 sm:px-6">
       {/* Hero Section */}
       <div className="relative w-full h-96 rounded-xl shadow-lg mb-10 overflow-hidden">
         <img 
@@ -43,7 +43,7 @@ const ElectronicsComponent = () => {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         {electronicsProducts.map((item) => (
-          <Link to={`/${item._id}`} key={item._id} className="w-full">
+          <Link to={`/${item._id}`} key={item._id} className="w-[95vw] sm:w-full">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ const ElectronicsComponent = () => {
                 <motion.img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-full object-cover rounded-t-xl transition-transform duration-300"
+                  className="w-full h-full object-contain rounded-t-xl transition-transform duration-300"
                   whileHover={{ scale: 1.1 }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>

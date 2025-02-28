@@ -20,13 +20,13 @@ const FashionComponent = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
+    <div className="min-h-screen sm:px-5 px-3 flex flex-col items-center bg-gray-50 py-12 ">
       {/* Hero Section */}
-      <div className="relative w-full h-96 rounded-xl shadow-lg mb-10 overflow-hidden">
+      <div className="relative   h-96 rounded-xl shadow-lg mb-10 overflow-hidden">
         <img 
           src="./faishon-3.webp" 
           alt="Trending Fashion" 
-          className="w-full h-full object-cover"
+          className="w-[95vw] h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-center p-6">
           <h1 className="text-5xl font-bold">Trending Fashion</h1>
@@ -40,7 +40,7 @@ const FashionComponent = () => {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         {fashionProducts.map((item) => (
-          <Link to={`/${item._id}`} key={item._id} className="w-full">
+          <Link to={`/${item._id}`} key={item._id} className="w-[90vw] sm:w-full mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ const FashionComponent = () => {
                 <motion.img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-full object-cover rounded-t-xl transition-transform duration-300"
+                  className="w-full h-full object-contain rounded-t-xl transition-transform duration-300"
                   whileHover={{ scale: 1.1 }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -86,7 +86,7 @@ const FashionComponent = () => {
 
                 {/* Shop Now Button */}
                 <motion.button
-                  className="mt-4 w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-2 rounded-lg font-medium shadow-md hover:from-pink-600 hover:to-red-600 transition"
+                  className="mt-1 w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-2 rounded-lg font-medium shadow-md hover:from-pink-600 hover:to-red-600 transition"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
                 >

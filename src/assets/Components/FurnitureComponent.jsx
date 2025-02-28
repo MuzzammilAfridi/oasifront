@@ -24,7 +24,7 @@ const FurnitureComponent = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
+    <div className="min-h-screen bg-gray-50 py-12 px-3">
       {/* Hero Section */}
       <div className="relative w-full h-96 rounded-xl shadow-lg mb-10 overflow-hidden">
         <img 
@@ -42,10 +42,10 @@ const FurnitureComponent = () => {
         Trending Furniture
       </h2>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+      <div className="grid  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         {furnitureProducts.map((item) => (
-          <Link to={`/${item._id}`} key={item._id} className="w-full">
-          <motion.div
+          <Link to={`/${item._id}`} key={item._id} className="w-[95vw] sm:w-full">
+            <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
@@ -57,7 +57,7 @@ const FurnitureComponent = () => {
                 <motion.img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-full object-cover rounded-t-xl transition-transform duration-300"
+                  className="w-full h-full object-contain rounded-t-xl transition-transform duration-300"
                   whileHover={{ scale: 1.1 }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -71,7 +71,7 @@ const FurnitureComponent = () => {
                 <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                   {item.description}
                 </p>
-                <p className="text-lg font-semibold text-pink-600 mt-2">
+                <p className="text-lg font-semibold text-blue-600 mt-2">
                   ${item.price}
                 </p>
 
@@ -90,7 +90,7 @@ const FurnitureComponent = () => {
 
                 {/* Shop Now Button */}
                 <motion.button
-                  className="mt-4 w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-2 rounded-lg font-medium shadow-md hover:from-pink-600 hover:to-red-600 transition"
+                  className="mt-4 w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-2 rounded-lg font-medium shadow-md hover:from-blue-600 hover:to-indigo-600 transition"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
                 >
