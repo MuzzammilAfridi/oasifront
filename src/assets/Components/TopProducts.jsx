@@ -59,7 +59,13 @@ const TopProducts = ({ products }) => {
                 <h3 className="font-semibold text-sm sm:text-base text-gray-800">
                   {elem.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">{elem.description}</p>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1">
+  {elem?.description
+    ? elem.description.length > 30
+      ? `${elem.description.substring(0, 30)}...`
+      : elem.description
+    : "No description available"}
+</p>
 
                 <div className="mt-2 px-3 py-1 rounded-md bg-gradient-to-r from-green-500 to-teal-500 text-white shadow-md">
                   <p className="text-sm font-semibold">
