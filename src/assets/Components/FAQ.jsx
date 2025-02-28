@@ -6,21 +6,21 @@ const FAQ = () => {
   const faqData = [
     {
       question: "What types of furniture do you offer?",
-      answer: "React is a JavaScript library for building user interfaces.",
+      answer: "We offer a wide range of furniture, including modern, classic, and custom pieces for homes and offices.",
     },
     {
       question: "Do you offer international shipping?",
-      answer: "Tailwind CSS is a utility-first CSS framework for building custom designs.",
+      answer: "Yes, we provide international shipping to select countries. Additional shipping charges may apply.",
     },
     {
       question: "What is your return policy?",
       answer:
-        "You can install Tailwind CSS in your React project and start using utility classes directly in your JSX components.",
+        "We accept returns within 30 days of purchase, provided the item is in its original condition.",
     },
     {
       question: "What payment methods do you accept?",
       answer:
-        "We accept major credit cards (Visa, MasterCard, American Express), PayPal, and financing options through Affirm. All transactions are secure and encrypted.",
+        "We accept credit/debit cards, PayPal, UPI, and net banking.",
     },
   ];
 
